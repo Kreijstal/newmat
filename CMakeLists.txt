@@ -1,5 +1,6 @@
 cmake_minimum_required(VERSION 3.10)
 project(newmat VERSION 1.10.4)
+option(USE_NAMESPACE "Compile with -Duse_namespace" OFF)
 
 # Set C++ standard
 set(CMAKE_CXX_STANDARD 11)
@@ -46,6 +47,10 @@ list(REMOVE_ITEM SOURCES
 
 # Define the library
 add_library(newmat ${SOURCES} ${HEADERS})
+
+if (USE_NAMESPACE)
+    target_compile_definitions(newmat PUBLIC -Duse_namespace)
+endif()
 
 # Include directories
 target_include_directories(newmat PUBLIC
